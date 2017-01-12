@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Submitting forms</title>
+</head>
+<body>
+<form id="myForm">
+    <input type="text" name="text" value="提交"/>
+    <input type="button" value="Submit Form"/>
+</form>
+<script type="text/javascript" src="jq.js"></script>
+<script type="text/javascript">
+    $(document).ready(function () {
+        $('input:button').click(function () {
+            $('#myForm').submit(function () {
+                // 表单验证
+                return true;
+            });
+        });
+    });
+</script>
+</body>
+</html>

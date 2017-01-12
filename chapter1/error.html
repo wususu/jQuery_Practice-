@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<!--检查缺少的图像, 用默认的图像替代-->
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Check missing images</title>
+    <style type="text/css">
+        div{
+            border: 1px solid black;
+            float: left;
+        }
+        img{
+            width: 180px;
+            height:200px;
+            margin:10px;
+        }
+    </style>
+    <script type="text/javascript" src="jq.js"></script>
+</head>
+<body>
+<div id="imageContainer"></div>
+</body>
+<script type="text/javascript">
+    $(document).ready(function () {
+        var images = ['janke.png', 'pping.png', 'tree.png', 'hello.png', 'hehe.png'];
+        var html = '';
+        $.each(images, function (key, value) {
+            html += '<img src="tools/' + value + '" />';
+        });
+        $('#imageContainer').html(html);
+        // error() 事件处理函数
+        // 在图像未能加载或者src属性不正确时执行
+        $('img').error(function () {
+            $(this).replaceWith('<img src="tools/none.png" alt="Could not load image">');
+        });
+
+    });
+</script>
+</html>
