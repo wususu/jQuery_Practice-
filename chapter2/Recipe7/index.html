@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Error handling</title>
+    <style type="text/css">
+
+    </style>
+    <script type="text/javascript" src="../../jq.js"></script>
+</head>
+<body>
+    <label for="fileName">Enter file name to load.</label>
+    <input type="text" id="fileName"/>
+    <input type="button" value="Load file"/>
+    <p id="result"></p>
+</body>
+<script type="text/javascript">
+    $(document).ready(function () {
+        $('input:button').click(function () {
+            if ($('#filename').val == '')
+            {
+                $('#result').html('<span>Please provide a file name.</span>');
+                return ;
+            }
+            $.ajax({
+                url: $('#fileName').val(),
+                method: 'get',
+                cache: false,
+                success: function (data) {
+                    $('#result').html(data);
+                },
+                error: function () {
+                    $('#result').html('<span>An error occured.</span>');
+                }
+            });
+        });
+    });
+</script>
+</html>

@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Keyboard Shortcuts</title>
+</head>
+<script type="text/javascript" src="../jq.js"></script>
+<style type="text/css">
+    div {
+        border: 1px solid black;
+        float: left;
+        height: 200px;
+        margin: 10px;
+        width: 220px;
+    }
+</style>
+<body>
+<div>You can toggle this div using Alt + S</div>
+<div>You can toggle this div using Alt + G</div>
+<p style="clear:both">&nbsp;</p>
+<p>Press Alt + B to toggle both live</p>
+</body>
+<script type="text/javascript">
+    $(document).ready(function () {
+        var altPressed = false; //Gobal
+        $(document).keydown(function (event) {
+            if (event.which == 18) {
+                altPressed = true;
+            }
+            if (altPressed) {
+                switch (event.which) {
+                    case 83:
+                        $('div:first').slideToggle('slow');
+                        return false;
+                        break;
+                    case 71:
+                        $('div:last').slideToggle('slow');
+                        return false;
+                        break;
+                    case 66:
+                        $('div').slideToggle('slow');
+                        return false;
+                        break;
+                }
+            }
+        });
+        $(document).keyup(function (event) {
+            if (event.which == 18)
+                altPressed = false;
+        });
+    });
+</script>
+</html>
