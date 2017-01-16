@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Validate empty fields</title>
+    <style type="text/css">
+        body{
+            font-family: "Trebuchet MS", Verdana;
+            width: 450px;
+        }
+        .error{
+            color: red;
+        }
+        #info{
+            color: #008000;
+            font-weight: bold;
+        }
+    </style>
+    <script type="text/javascript" src="../../jq.js"></script>
+</head>
+<body>
+<form>
+    <fieldset>
+        <legend><strong>Personal</strong></legend>
+        <table>
+            <tbody>
+            <tr>
+                <td>Name:*</td>
+                <td><input type="text" class="required"/></td>
+            </tr>
+            <tr>
+                <td>Address:*</td>
+                <td><input type="text" class="required"/></td>
+            </tr>
+            <tr>
+                <td>City:</td>
+                <td><input type="text"/></td>
+            </tr>
+            <tr>
+                <td>Country:*</td>
+                <td><input type="text" class="required"></td>
+            </tr>
+            </tbody>
+        </table>
+    </fieldset>
+    <fieldset>
+        <legend><strong>Other Details</strong></legend>
+        <table>
+            <tbody>
+
+                <tr>
+                    <td>Age:*</td>
+                    <td><input type="text" class="number required"> </td>
+                </tr>
+                <tr>
+                    <td>Monthly Expenses:*</td>
+                    <td><input type="text" class="number required"></td>
+                </tr>
+            </tbody>
+        </table>
+    </fieldset>
+    <br/>
+    <span id="info"></span>
+    <br/>
+    <input type="button" value="Check" id="check"/>
+</form>
+</body>
+<script type="text/javascript">
+    $(document).ready(function () {
+        $('#check').click(validate);
+        function validate() {
+            var dataVlid = true;
+            $('#info').html('');
+            $('.required').each(function () {
+                var cur = $(this);
+                cur.next('span').remove();
+                if ($.trim(cur.val()) == ''){
+                    cur.after('<span class="error">Mandatory field</span>');
+                    dataVlid = false;
+                }
+            });
+            if (!dataVlid)
+                    return false;
+            $('.number').each(function () {
+                var cur = $(this);
+                cur.next().remove();
+                if (isNaN(cur.val())){
+                    cur.after('<span class="error">Must be a number</span>');
+                    dataVlid = false;
+                }
+            });
+
+            if (dataVlid){
+                $('#info').html('Validation OK');
+            }
+        }
+    });
+</script>
+</html>

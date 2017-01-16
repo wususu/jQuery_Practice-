@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Add rows dynamically</title>
+</head>
+<style type="text/css">
+    fieldset {
+        width: 450px;
+    }
+    ul{
+        padding: 2px;
+        list-style: none;
+    }
+    label{
+        float: left;
+        width: 100px;
+    }
+</style>
+<script type="text/javascript" src="../../jq.js"></script>
+<body>
+<form action="process.php" method="post">
+    <fieldset>
+        <legend>Website you visit daily</legend>
+        <ul id="site">
+            <li>
+                <label>Name</label>
+                <input type="text" value=""/>
+            </li>
+        </ul>
+        <input type="button" id="add" value="Add More"/>
+    </fieldset>
+</form>
+</body>
+<script type="text/javascript">
+    $(document).ready(function () {
+        $('#add').click(function () {
+            var str = '<li>';
+            str += '<label>Name</label><input type="text" value=""/>';
+            str += '<input type="button" id="remove" value="Remove">';
+            str += '</li>';
+            $('#site').append(str);
+        });
+        $('#remove').live('click', function () {
+            $(this).parent('li').remove();
+        });
+    });
+</script>
+</html>
