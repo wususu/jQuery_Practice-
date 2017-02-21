@@ -1,0 +1,28 @@
+body{
+    font-family: "Trebuchet MS", Verdana;
+}
+ul{
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+li.menuHeader{
+    border: 1px solid #fff;
+    cursor: pointer;
+    float: left;
+    padding: 5px 10px;
+    text-align: center;
+    width: 120px;
+}
+a{
+    color: #fff;
+}
+.about{
+    background-image: url(1_1.jpg);
+}
+.product{
+    background-image: url(1_2.jpg);
+}
+.tech{
+    background-image: url(1_3.jpg);
+}

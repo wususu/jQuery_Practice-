@@ -25,7 +25,7 @@
         var images = ['janke.png', 'pping.png', 'tree.png', 'hello.png', 'hehe.png'];
         var html = '';
         $.each(images, function (key, value) {
-            html += '<img src="tools' + value + '" />';
+            html += '<img src=' + value + '"tools" />';
         });
         $('#imageContainer').html(html);
         // error() 事件处理函数
