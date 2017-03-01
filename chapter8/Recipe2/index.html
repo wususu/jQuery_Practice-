@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Into DB</title>
+    <style type="text/css">
+        body{
+            font-family: "Trebuchet MS", Arial, Verdana;
+            width: 500px;
+        }
+        input, textarea{
+            vertical-align: top;
+        }
+        label{
+            float: left;
+            width: 150px;
+        }
+    </style>
+    <script type="text/javascript" src="../../jq.js"></script>
+</head>
+<body>
+    <fieldset>
+        <legend><strong>Add a function</strong></legend>
+        <form action="" id="frMain">
+            <p>
+                <label>Select a Language</label>
+                <select name="language" class="select">
+                    <!--jQuery 嵌入-->
+                </select>
+            </p>
+            <p>
+                <label>Function name</label>
+                <input type="text" name="functionName" class="functionName required">
+            </p>
+            <p>
+                <label>Summary</label>
+                <input type="text" name="summary" class="summary required">
+            </p>
+            <p>
+                <label>Example</label>
+                <textarea rows="10" cols="30" name="example" class="example required"></textarea>
+            </p>
+            <p>
+                <strong id="error"></strong>
+            </p>
+            <p>
+                <input type="submit" name="save" class="button" value="Save Information">
+            </p>
+        </form>
+    </fieldset>
+</body>
+<script type="text/javascript">
+    $(document).ready(function () {
+        $.ajax({
+            url: 'result.php',
+            type: 'GET',
+            data: {'type': 'get'},
+            dataType: 'text',
+            success: function start(data) {
+                $('.select').html(data);
+            }
+        });
+
+        $('.button').click(function () {
+            var flag = true;
+            $('#error').empty();
+            $('.required').each(function () {
+                if (jQuery.trim($(this).val())=='')
+                {
+                    console.log($(this).val());
+                    console.log(flag);
+                    flag = false;
+                }
+            });
+            if (!flag){
+                $('#error').html('Please fill all the fields');
+                return false;
+            }else {
+                $.ajax({
+                    url: 'result.php',
+                    type: 'POST',
+                    dataType: 'text',
+                    data: {'functionName': $('.functionName').val(), 'summary': $('.summary').val(), 'example': $('.example').val(), 'language': $('.select').val()},
+                    success: function(data){
+                        if (data == 'ok')
+                            $('#error').html('OK');
+                        else
+                            $('#error').html('fail');
+                    },
+                    error: function () {
+                        $('#error').html('fail');
+                    }
+                });
+            }
+            return false;
+        });
+
+    });
+
+</script>
+</html>

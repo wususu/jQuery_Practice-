@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Tabs</title>
+    <link rel="stylesheet" type="text/css" href="tabs.css" media="screen"/>
+    <script type="text/javascript" src="../../jq.js"></script>
+</head>
+<body>
+    <div class="tabContainer">
+        <ul class="tabHeader">
+            <li>Tab 1</li>
+            <li>Tab 2</li>
+            <li>Tab 3</li>
+        </ul>
+        <div class="contents">
+            <div class="tabContent">
+                <h3>Tab 1</h3>
+                Content for tab1
+            </div>
+            <div class="tabContent">
+                <h3>Tab 2</h3>
+                Content for tab2
+            </div>
+            <div class="tabContent">
+                <h3>Tab 3</h3>
+                Content for tab3
+            </div>
+        </div>
+    </div>
+</body>
+<script type="text/javascript">
+    $(document).ready(function () {
+        // 隐藏索引值大于0的所有同类容器
+        $('.tabContent:gt(0)').hide();
+        // 为索引为0的容器添加类
+        $('.tabHeader > li:eq(0)').addClass('active');
+        $('.tabHeader > li').click(showHideTabs);
+    });
+    function showHideTabs() {
+        var allLi = $('.tabHeader > li').removeClass('active');
+        $(this).addClass('active');
+        $('.tabContent:visible').hide();
+        var index = allLi.index(this);
+        $('.tabContent:eq('+index+')').show();
+    }
+</script>
+</html>
